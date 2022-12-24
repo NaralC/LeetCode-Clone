@@ -8,9 +8,9 @@ import axios from "axios";
 
 const App: React.FC = () => {
   const [code, setCode] = useState<string>(
-    `def isPalindrome():
+    `def twoSum(arr, target):
   # Your code here
-  string = 'racecar'`
+  return`
   );
 
   const onChange = useCallback((value: string, viewUpdate: ViewUpdate) => {
@@ -22,18 +22,17 @@ const App: React.FC = () => {
     axios
       .post("http://127.0.0.1:80/python", { code })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
-    console.log(code);
   };
 
   return (
     <div className="bg-gray-500 w-screen h-screen flex flex-col justify-center p-10 text-left gap-3">
       <div className="text-white font-semibold text-2xl">
-        Create a function that checks if a string is a palindrome in Python
+        Write a function that returns if a string is a palindrome
       </div>
       <CodeMirror
         value={code}
