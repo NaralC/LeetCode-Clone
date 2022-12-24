@@ -2,7 +2,7 @@ const fileSystem = require("fs")
 const express = require('express')
 const cors = require("cors")
 const app = express()
-const {PythonShell} = require("python-shell")
+const { PythonShell } = require("python-shell")
 const port = 80
 
 app.use(cors());
@@ -20,12 +20,11 @@ app.post('/python', (req, res) => {
     PythonShell.run('from_user.py', options, function (err, results) {
         if (err) throw err;
         // results is an array consisting of messages collected during execution
-        console.log('results: %j', results);
+        console.log(results)
+        res.send({
+            verdict: results
+        })
     });
-
-    res.json(
-        { message: "successful" }
-    )
 })
 
 app.listen(port, () => {

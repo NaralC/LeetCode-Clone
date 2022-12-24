@@ -7,6 +7,7 @@ import { okaidia } from "@uiw/codemirror-theme-okaidia";
 import axios from "axios";
 
 const App: React.FC = () => {
+  const [testCases, setTestCases] = useState<string[]>([])
   const [code, setCode] = useState<string>(
     `def isPalindrome(string):
   # Your code here
@@ -31,16 +32,17 @@ const App: React.FC = () => {
     axios
       .post("http://127.0.0.1:80/python", { code: submission })
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data.verdict);
+        setTestCases(res.data.verdict)
       })
       .catch((error) => {
-        // console.log(error);
+        console.log(error);
       });
   };
 
   return (
     <div className="bg-gray-500 w-screen h-screen flex flex-col justify-center p-10 text-left gap-3">
-      <div className="text-white font-semibold text-2xl">
+      <div className="text-white font-semibold text-2xl text-center">
         Write a function that returns if a string is a palindrome
       </div>
       <CodeMirror
@@ -57,6 +59,9 @@ const App: React.FC = () => {
       >
         Submit
       </button>
+      {testCases.map((t, idx) => {
+        return <div className="text-3xl text-center text-white font-light" key={idx}>{t === 'True' ? '😎True' : '🤓False'}</div>
+      })}
     </div>
   );
 };
