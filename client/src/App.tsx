@@ -8,7 +8,7 @@ import axios from "axios";
 
 const App: React.FC = () => {
   const [code, setCode] = useState<string>(
-    `def twoSum(arr, target):
+    `def isPalindrome(string):
   # Your code here
   return`
   );
@@ -19,8 +19,17 @@ const App: React.FC = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+
+    let submission =
+      `import sys\n` +
+      code +
+      `\nif __name__ == '__main__':
+    string = sys.argv[1]
+    result = bool(sys.argv[-1])
+    print(isPalindrome(string) == result)`;
+
     axios
-      .post("http://127.0.0.1:80/python", { code })
+      .post("http://127.0.0.1:80/python", { code: submission })
       .then((res) => {
         // console.log(res.data);
       })
