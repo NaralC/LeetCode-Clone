@@ -32,8 +32,8 @@ const App: React.FC = () => {
     axios
       .post("http://127.0.0.1:80/python", { code: submission })
       .then((res) => {
-        console.log(res.data.verdict);
-        setTestCases(res.data.verdict)
+        console.log(res.data.verdicts);
+        setTestCases(res.data.verdicts)
       })
       .catch((error) => {
         console.log(error);
@@ -41,8 +41,8 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-500 w-screen h-screen flex flex-col justify-center p-10 text-left gap-3">
-      <div className="text-white font-semibold text-2xl text-center">
+    <div className="bg-gray-500 w-screen min-h-screen flex flex-col justify-center p-10 text-left gap-3">
+      <div className="text-white font-semibold text-xl md:text-3xl text-center delay-200 transition-all">
         Write a function that returns if a string is a palindrome
       </div>
       <CodeMirror
@@ -60,7 +60,7 @@ const App: React.FC = () => {
         Submit
       </button>
       {testCases.map((t, idx) => {
-        return <div className="text-3xl text-center text-white font-light" key={idx}>{t === 'True' ? '😎True' : '🤓False'}</div>
+        return <div className="text-xl md:text-3xl text-center text-white font-light delay-200 transition-all" key={idx}>{t === 'True' ? '😎Passed' : '🤓Failed'}</div>
       })}
     </div>
   );
